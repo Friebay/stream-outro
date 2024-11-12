@@ -28,7 +28,7 @@
             flex-direction: column;
             text-align: center;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1s; /* Removing ease-in and ease-out */
         }
         .visible {
             display: flex !important;
@@ -44,7 +44,7 @@
         
         /* Rolling credits animation */
         @keyframes roll {
-            from { transform: translateY(130%); }
+            from { transform: translateY(100%); }
             to { transform: translateY(-100%); }
         }
         .credits {
@@ -59,14 +59,15 @@
     <div class="screen" id="screen2"> 
         <img src="{{ url_for('static', filename='images/logo.jpg') }}" style="opacity: 0.8;"> 
     </div> <!-- Logo for 2 seconds -->
-    <div class="screen" id="screen3"></div> <!-- Black screen for 2 seconds -->
+    <div class="screen" id="black-screen1"></div> <!-- Black screen for 2 seconds (gap) -->
 
-    <!-- Text sequences with dynamic data -->
     <div class="screen" id="screen4"> 
         <p>Director and Writer</p>
         <p class="big-text">deMiko</p>
     </div>
 
+    <div class="screen" id="black-screen2"></div> <!-- Black screen for 2 seconds (gap) -->
+    
     <div class="screen" id="screen5">
         <p>Starred by</p>
         <p class="big-text">
@@ -75,7 +76,8 @@
         </p>
     </div>
 
-
+    <div class="screen" id="black-screen3"></div> <!-- Black screen for 2 seconds (gap) -->
+    
     <div class="screen" id="screen6">
         <p>Total amount of chatters</p>
         <p class="big-text">{{ top_chatters | length }}</p>
@@ -85,12 +87,16 @@
         <p class="big-text">{{ top_emotes | length }}</p>
     </div>
 
+    <div class="screen" id="black-screen4"></div> <!-- Black screen for 2 seconds (gap) -->
+
     <div class="screen" id="screen7">
         <p>Different emotes</p>
         <p class="big-text">{{ emotes | length + emotes_default | length }}</p>
         <p>Total emotes</p>
         <p class="big-text">{{ top_emotes | length }}</p>
     </div>
+
+    <div class="screen" id="black-screen5"></div> <!-- Black screen for 2 seconds (gap) -->
 
     <div class="screen" id="credits-roll">
         <div class="credits">
@@ -110,14 +116,18 @@
 
         // Define the sequence of screens with their durations in milliseconds
         const sequence = [
-            { id: 'screen1', duration: 3000 },
+            { id: 'screen1', duration: 2000 },
             { id: 'screen2', duration: 2000 },
-            { id: 'screen3', duration: 2000 },
+            { id: 'black-screen1', duration: 2000 },
             { id: 'screen4', duration: 3000 },
+            { id: 'black-screen2', duration: 2000 },
             { id: 'screen5', duration: 3000 },
+            { id: 'black-screen3', duration: 2000 },
             { id: 'screen6', duration: 4000 },
+            { id: 'black-screen4', duration: 2000 },
             { id: 'screen7', duration: 4000 },
-            { id: 'credits-roll', duration: 45000 }, // Credits roll for 30 seconds
+            { id: 'black-screen5', duration: 2000 },
+            { id: 'credits-roll', duration: 45000 },
         ];
         
         let currentStep = 0;
