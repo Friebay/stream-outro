@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stream Outro</title>
     <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
     <style>
-        /* Basic styling for screens and text alignment */
-        body, html {
+        body,
+        html,
+        .screen p {
+            color: gold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        body,
+        html {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden;
             font-family: 'Galindo', sans-serif;
             color: white;
             background-color: black;
         }
+
         .screen {
             display: none;
             position: absolute;
@@ -28,66 +37,74 @@
             flex-direction: column;
             text-align: center;
             opacity: 0;
-            transition: opacity 1s; /* Removing ease-in and ease-out */
+            transition: opacity 0s;
         }
+
         .visible {
             display: flex !important;
             opacity: 1 !important;
         }
+
         .big-text {
             font-size: 50px;
         }
+
         .small-image {
             width: 50px;
             height: auto;
         }
-        
-        /* Rolling credits animation */
+
         @keyframes roll {
-            from { transform: translateY(100%); }
-            to { transform: translateY(-100%); }
+            from {
+                transform: translateY(70%);
+            }
+
+            to {
+                transform: translateY(-100%);
+            }
         }
+
         .credits {
             animation: roll 45s linear infinite;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Sequence screens displayed at the top of the viewport -->
-    <div class="screen" id="screen1"></div> <!-- Black screen for 3 seconds -->
-    <div class="screen" id="screen2"> 
-        <img src="{{ url_for('static', filename='images/logo.jpg') }}" style="opacity: 0.8;"> 
-    </div> <!-- Logo for 2 seconds -->
-    <div class="screen" id="black-screen1"></div> <!-- Black screen for 2 seconds (gap) -->
+    <div class="screen" id="screen1"></div>
+    <div class="screen" id="screen2">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" style="opacity: 0.8;">
+    </div>
+    <div class="screen" id="black-screen1"></div>
 
-    <div class="screen" id="screen4"> 
+    <div class="screen" id="screen4">
         <p>Director and Writer</p>
         <p class="big-text">deMiko</p>
     </div>
 
-    <div class="screen" id="black-screen2"></div> <!-- Black screen for 2 seconds (gap) -->
-    
+    <div class="screen" id="black-screen2"></div>
+
     <div class="screen" id="screen5">
         <p>Starred by</p>
         <p class="big-text">
-            deMiko <img src="{{ url_for('static', filename='images/demikoL.webp') }}" class="small-image"> 
+            deMiko <img src="{{ url_for('static', filename='images/demikoL.webp') }}" class="small-image">
             Sushi <img src="{{ url_for('static', filename='images/sushisL.webp') }}" class="small-image">
         </p>
     </div>
 
-    <div class="screen" id="black-screen3"></div> <!-- Black screen for 2 seconds (gap) -->
-    
+    <div class="screen" id="black-screen3"></div>
+
     <div class="screen" id="screen6">
         <p>Total amount of chatters</p>
         <p class="big-text">{{ top_chatters | length }}</p>
         <p>New chatters</p>
-        <p class="big-text">{{ top_chatters | length }}</p> <!-- Adjust with actual new chatters data -->
+        <p class="big-text">{{ top_chatters | length }}</p>
         <p>Total amount of messages</p>
         <p class="big-text">{{ top_emotes | length }}</p>
     </div>
 
-    <div class="screen" id="black-screen4"></div> <!-- Black screen for 2 seconds (gap) -->
+    <div class="screen" id="black-screen4"></div>
 
     <div class="screen" id="screen7">
         <p>Different emotes</p>
@@ -96,7 +113,7 @@
         <p class="big-text">{{ top_emotes | length }}</p>
     </div>
 
-    <div class="screen" id="black-screen5"></div> <!-- Black screen for 2 seconds (gap) -->
+    <div class="screen" id="black-screen5"></div>
 
     <div class="screen" id="credits-roll">
         <div class="credits">
@@ -109,36 +126,67 @@
     <audio id="backgroundMusic" src="{{ url_for('static', filename='songs/Exitlude.mp3') }}" autoplay></audio>
 
     <script>
-        // Start audio playback from 34 seconds
         const audio = document.getElementById("backgroundMusic");
-        audio.currentTime = 34;  // Set start time to 0:34
-        audio.play();   
-
-        // Define the sequence of screens with their durations in milliseconds
-        const sequence = [
-            { id: 'screen1', duration: 2000 },
-            { id: 'screen2', duration: 2000 },
-            { id: 'black-screen1', duration: 2000 },
-            { id: 'screen4', duration: 3000 },
-            { id: 'black-screen2', duration: 2000 },
-            { id: 'screen5', duration: 3000 },
-            { id: 'black-screen3', duration: 2000 },
-            { id: 'screen6', duration: 4000 },
-            { id: 'black-screen4', duration: 2000 },
-            { id: 'screen7', duration: 4000 },
-            { id: 'black-screen5', duration: 2000 },
-            { id: 'credits-roll', duration: 45000 },
+        audio.currentTime = 34;
+        audio.play();
+        const sequence = [{
+                id: 'screen1',
+                duration: 2000
+            },
+            {
+                id: 'screen2',
+                duration: 2000
+            },
+            {
+                id: 'black-screen1',
+                duration: 2000
+            },
+            {
+                id: 'screen4',
+                duration: 3000
+            },
+            {
+                id: 'black-screen2',
+                duration: 2000
+            },
+            {
+                id: 'screen5',
+                duration: 3000
+            },
+            {
+                id: 'black-screen3',
+                duration: 2000
+            },
+            {
+                id: 'screen6',
+                duration: 4000
+            },
+            {
+                id: 'black-screen4',
+                duration: 2000
+            },
+            {
+                id: 'screen7',
+                duration: 4000
+            },
+            {
+                id: 'black-screen5',
+                duration: 2000
+            },
+            {
+                id: 'credits-roll',
+                duration: 45000
+            },
         ];
-        
+
         let currentStep = 0;
 
         function showNextScreen() {
             if (currentStep > 0) {
-                // Fade out the previous screen
                 document.getElementById(sequence[currentStep - 1].id).classList.remove('visible');
             }
+
             if (currentStep < sequence.length) {
-                // Fade in the current screen
                 const screen = document.getElementById(sequence[currentStep].id);
                 screen.classList.add('visible');
                 setTimeout(showNextScreen, sequence[currentStep].duration);
@@ -146,17 +194,15 @@
             }
         }
 
-        // Start the sequence on page load
-        window.onload = function() {
+        window.onload = function () {
             showNextScreen();
-            
-            // Start audio playback at specified time after it loads
-            audio.addEventListener("canplay", function() {
-                audio.currentTime = 34; // Start at 0:34
+
+            audio.addEventListener("canplay", function () {
+                audio.currentTime = 34;
                 audio.play();
             });
         };
-        
+
     </script>
 </body>
 </html>
