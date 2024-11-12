@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stream Outro</title>
     <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
     <!-- Sequence screens displayed at the top of the viewport -->
-    <div class="screen" id="screen1"></div> <!-- Black screen for 3 seconds -->
+    <div class="screen" id="black-screen0"></div>
     <div class="screen" id="screen2">
         <img src="{{ url_for('static', filename='images/logo.jpg') }}" style="opacity: 0.8;">
-    </div> <!-- Logo for 2 seconds -->
-    <div class="screen" id="black-screen1"></div> <!-- Black screen for 2 seconds (gap) -->
+    </div>
+    <div class="screen" id="black-screen1"></div>
 
     <div class="screen" id="screen4">
         <p>Director and Writer</p>
         <p class="big-text">deMiko</p>
     </div>
 
-    <div class="screen" id="black-screen2"></div> <!-- Black screen for 2 seconds (gap) -->
+    <div class="screen" id="black-screen2"></div>
 
     <div class="screen" id="screen5">
         <p>Starred by</p>
@@ -33,18 +33,18 @@
         </p>
     </div>
 
-    <div class="screen" id="black-screen3"></div> <!-- Black screen for 2 seconds (gap) -->
+    <div class="screen" id="black-screen3"></div>
 
     <div class="screen" id="screen6">
         <p>Total amount of chatters</p>
         <p class="big-text">{{ top_chatters | length }}</p>
         <p>New chatters</p>
-        <p class="big-text">{{ top_chatters | length }}</p> <!-- Adjust with actual new chatters data -->
+        <p class="big-text">{{ top_chatters | length }}</p>
         <p>Total amount of messages</p>
         <p class="big-text">{{ top_emotes | length }}</p>
     </div>
 
-    <div class="screen" id="black-screen4"></div> <!-- Black screen for 2 seconds (gap) -->
+    <div class="screen" id="black-screen4"></div>
 
     <div class="screen" id="screen7">
         <p>Different emotes</p>
@@ -53,7 +53,67 @@
         <p class="big-text">{{ top_emotes | length }}</p>
     </div>
 
-    <div class="screen" id="black-screen5"></div> <!-- Black screen for 2 seconds (gap) -->
+    <div class="screen" id="black-screen5"></div>
+
+    <div class="screen" id="screen8">
+        <p class="left-aligned">The Mentioner.................{{ person_who_mentioned_streamer_the_most_times }}</p>
+        <p class="left-aligned">The Emotional........................{{ person_who_typed_the_most_emotes }}</p>
+    </div>
+
+    <div class="screen" id="black-screen6"></div>
+
+    <div class="screen" id="screen9">
+        <p class="left-aligned">Most Messages</p>
+        <div class="chatter-table">
+            <div class="chatter-row">
+                <p>{{ top_1_chatter_username }}: {{ top_1_chatter_username_message_amount }}</p>
+                <p>{{ top_2_chatter_username }}: {{ top_2_chatter_username_message_amount }}</p>
+                <p>{{ top_3_chatter_username }}: {{ top_3_chatter_username_message_amount }}</p>
+            </div>
+            <div class="chatter-row">
+                <p>{{ top_4_chatter_username }}: {{ top_4_chatter_username_message_amount }}</p>
+                <p>{{ top_5_chatter_username }}: {{ top_5_chatter_username_message_amount }}</p>
+                <p>{{ top_6_chatter_username }}: {{ top_6_chatter_username_message_amount }}</p>
+            </div>
+            <div class="chatter-row">
+                <p>{{ top_7_chatter_username }}: {{ top_7_chatter_username_message_amount }}</p>
+                <p>{{ top_8_chatter_username }}: {{ top_8_chatter_username_message_amount }}</p>
+                <p>{{ top_9_chatter_username }}: {{ top_9_chatter_username_message_amount }}</p>
+            </div>
+            <div class="chatter-row">
+                <p>{{ top_10_chatter_username }}: {{ top_10_chatter_username_message_amount }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="screen" id="black-screen7"></div>
+
+    <div class="screen" id="screen10">
+        <p class="left-aligned">Top Emotes</p>
+        <div class="emote-table">
+            <div class="emote-row">
+                <p><img src="{{ top_1_emote_webp }}" alt="{{ top_1_emote_name }}" class="small-image"> ({{ top_1_emote_name }}) {{ top_1_emote_amount }}</p>
+                <p><img src="{{ top_2_emote_webp }}" alt="{{ top_2_emote_name }}" class="small-image"> ({{ top_2_emote_name }}) {{ top_2_emote_amount }}</p>
+                <p><img src="{{ top_3_emote_webp }}" alt="{{ top_3_emote_name }}" class="small-image"> ({{ top_3_emote_name }}) {{ top_3_emote_amount }}</p>
+            </div>
+            <div class="emote-row">
+                <p><img src="{{ top_4_emote_webp }}" alt="{{ top_4_emote_name }}" class="small-image"> ({{ top_4_emote_name }}) {{ top_4_emote_amount }}</p>
+                <p><img src="{{ top_5_emote_webp }}" alt="{{ top_5_emote_name }}" class="small-image"> ({{ top_5_emote_name }}) {{ top_5_emote_amount }}</p>
+                <p><img src="{{ top_6_emote_webp }}" alt="{{ top_6_emote_name }}" class="small-image"> ({{ top_6_emote_name }}) {{ top_6_emote_amount }}</p>
+            </div>
+            <div class="emote-row">
+                <p><img src="{{ top_7_emote_webp }}" alt="{{ top_7_emote_name }}" class="small-image"> ({{ top_7_emote_name }}) {{ top_7_emote_amount }}</p>
+                <p><img src="{{ top_8_emote_webp }}" alt="{{ top_8_emote_name }}" class="small-image"> ({{ top_8_emote_name }}) {{ top_8_emote_amount }}</p>
+                <p><img src="{{ top_9_emote_webp }}" alt="{{ top_9_emote_name }}" class="small-image"> ({{ top_9_emote_name }}) {{ top_9_emote_amount }}</p>
+            </div>
+            <div class="emote-row">
+                <p><img src="{{ top_10_emote_webp }}" alt="{{ top_10_emote_name }}" class="small-image"> ({{ top_10_emote_name }}) {{ top_10_emote_amount }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="screen" id="black-screen8"></div>
+    
 
     <div class="screen" id="credits-roll">
         <div class="credits">
@@ -65,7 +125,7 @@
 
     <audio id="backgroundMusic" src="{{ url_for('static', filename='songs/Exitlude.mp3') }}" autoplay></audio>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Link to external JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>

@@ -1,17 +1,15 @@
-/* Global text color and shadow */
 body,
 html,
 .screen p {
     color: gold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Small shadow effect */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Basic styling for screens and text alignment */
 body,
 html {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden;
     font-family: 'Galindo', sans-serif;
     color: white;
     background-color: black;
@@ -30,7 +28,7 @@ html {
     flex-direction: column;
     text-align: center;
     opacity: 0;
-    transition: opacity 0s; /* Removing ease-in and ease-out */
+    transition: opacity 0s;
 }
 
 .visible {
@@ -47,10 +45,9 @@ html {
     height: auto;
 }
 
-/* Rolling credits animation */
 @keyframes roll {
     from {
-        transform: translateY(70%);
+        transform: translateY(100%);
     }
 
     to {
@@ -60,4 +57,61 @@ html {
 
 .credits {
     animation: roll 45s linear infinite;
+}
+
+/* Left-aligned text for the "Most Messages" section */
+.left-aligned {
+    text-align: left;
+    font-size: 40px;
+    color: gold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Small shadow effect */
+}
+
+/* Chatter table layout */
+.chatter-table {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.chatter-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.chatter-row p {
+    font-size: 30px;
+    color: gold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Emote table layout */
+.emote-table {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.emote-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.emote-row p {
+    font-size: 30px;
+    color: gold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.small-image {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
 }

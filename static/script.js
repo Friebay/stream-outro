@@ -1,21 +1,27 @@
 // Start audio playback from 34 seconds
 const audio = document.getElementById("backgroundMusic");
-audio.currentTime = 34;  // Set start time to 0:34
+audio.currentTime = 34; 
 audio.play();
 
 // Define the sequence of screens with their durations in milliseconds
 const sequence = [
-    { id: 'screen1', duration: 2000 },
-    { id: 'screen2', duration: 2000 },
-    { id: 'black-screen1', duration: 2000 },
-    { id: 'screen4', duration: 3000 },
-    { id: 'black-screen2', duration: 2000 },
-    { id: 'screen5', duration: 3000 },
-    { id: 'black-screen3', duration: 2000 },
-    { id: 'screen6', duration: 4000 },
-    { id: 'black-screen4', duration: 2000 },
-    { id: 'screen7', duration: 4000 },
-    { id: 'black-screen5', duration: 2000 },
+    { id: 'black-screen0', duration: 200 },
+    { id: 'screen2', duration: 300 },
+    { id: 'black-screen1', duration: 200 },
+    { id: 'screen4', duration: 300 },
+    { id: 'black-screen2', duration: 200 },
+    { id: 'screen5', duration: 300 },
+    { id: 'black-screen3', duration: 200 },
+    { id: 'screen6', duration: 400 },
+    { id: 'black-screen4', duration: 200 },
+    { id: 'screen7', duration: 400 },
+    { id: 'black-screen5', duration: 200 },
+    { id: 'screen8', duration: 4000 },
+    { id: 'black-screen6', duration: 200 },
+    { id: 'screen9', duration: 4000 },
+    { id: 'black-screen7', duration: 200 },
+    { id: 'screen10', duration: 4000 },
+    { id: 'black-screen8', duration: 200 },
     { id: 'credits-roll', duration: 45000 },
 ];
 
@@ -42,7 +48,7 @@ window.onload = function () {
 
     // Start audio playback at specified time after it loads
     audio.addEventListener("canplay", function () {
-        audio.currentTime = 34; // Start at 0:34
+        audio.currentTime = 34;
         audio.play();
     });
 };
