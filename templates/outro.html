@@ -100,16 +100,23 @@
         </div>
     </div>
 
+    <audio id="backgroundMusic" src="{{ url_for('static', filename='songs/Exitlude.mp3') }}" autoplay></audio>
+
     <script>
+        // Start audio playback from 34 seconds
+        const audio = document.getElementById("backgroundMusic");
+        audio.currentTime = 34;  // Set start time to 0:34
+        audio.play();   
+
         // Define the sequence of screens with their durations in milliseconds
         const sequence = [
-            { id: 'screen1', duration: 300 },
-            { id: 'screen2', duration: 200 },
-            { id: 'screen3', duration: 200 },
-            { id: 'screen4', duration: 300 },
-            { id: 'screen5', duration: 300 },
-            { id: 'screen6', duration: 400 },
-            { id: 'screen7', duration: 400 },
+            { id: 'screen1', duration: 3000 },
+            { id: 'screen2', duration: 2000 },
+            { id: 'screen3', duration: 2000 },
+            { id: 'screen4', duration: 3000 },
+            { id: 'screen5', duration: 3000 },
+            { id: 'screen6', duration: 4000 },
+            { id: 'screen7', duration: 4000 },
             { id: 'credits-roll', duration: 45000 }, // Credits roll for 30 seconds
         ];
         
@@ -130,7 +137,16 @@
         }
 
         // Start the sequence on page load
-        window.onload = showNextScreen;
+        window.onload = function() {
+            showNextScreen();
+            
+            // Start audio playback at specified time after it loads
+            audio.addEventListener("canplay", function() {
+                audio.currentTime = 34; // Start at 0:34
+                audio.play();
+            });
+        };
+        
     </script>
 </body>
 </html>
