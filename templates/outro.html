@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Outro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
+    <style>
+        /* Basic styling for screens and text alignment */
+        .screen {
+            display: none;
+            font-family: 'Galindo', sans-serif;
+            color: white;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            text-align: center;
+            flex-direction: column;
+        }
+        .visible {
+            display: flex !important;
+        }
+        .big-text {
+            font-size: 50px;
+        }
+        .small-image {
+            width: 50px;
+            height: auto;
+        }
+        /* Additional styles for rolling credits */
+        @keyframes roll {
+            from { transform: translateY(100%); }
+            to { transform: translateY(-100%); }
+        }
+        .credits {
+            animation: roll 30s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Step-by-step screens -->
+    <div class="screen" id="screen1"></div> <!-- Black screen for 3 seconds -->
+    <div class="screen" id="screen2"> <img src="logo.png" style="opacity: 0.8;"> </div> <!-- Logo for 2 seconds -->
+    <div class="screen" id="screen3"></div> <!-- Black screen for 2 seconds -->
+
+    <!-- Text sequences with dynamic data -->
+    <div class="screen" id="screen4"> 
+        <p>Director and Writer</p>
+        <p class="big-text">deMiko</p>
+    </div>
+    
+    <div class="screen" id="screen5">
+        <p>Starred by</p>
+        <p class="big-text">deMiko <img src="path/to/demiko_image.jpg" class="small-image"> Sushi <img src="path/to/sushi_image.jpg" class="small-image"></p>
+    </div>
+
+    <div class="screen" id="screen6">
+        <p>Total amount of chatters</p>
+        <p class="big-text">{{ top_chatters | length }}</p>
+        <p>New chatters</p>
+        <p class="big-text">{{ top_chatters | length }}</p> <!-- Adjust with actual new chatters data -->
+        <p>Total amount of messages</p>
+        <p class="big-text">{{ top_emotes | length }}</p>
+    </div>
+
+    <div class="screen" id="screen7">
+        <p>Different emotes</p>
+        <p class="big-text">{{ emotes | length + emotes_default | length }}</p>
+        <p>Total emotes</p>
+        <p class="big-text">{{ top_emotes | length }}</p>
+    </div>
+
+    <div class="screen" id="credits-roll">
+        <div class="credits">
+            {% for chatter in top_chatters %}
+                <p>{{ chatter['Username'] }} - First message at {{ chatter.get('First Message Time', '') }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        // Define a sequence of screens with durations in milliseconds
+        const sequence = [
+            { id: 'screen1', duration: 3000 },
+            { id: 'screen2', duration: 2000 },
+            { id: 'screen3', duration: 2000 },
+            { id: 'screen4', duration: 3000 },
+            { id: 'screen5', duration: 3000 },
+            { id: 'screen6', duration: 4000 },
+            { id: 'screen7', duration: 4000 },
+            { id: 'credits-roll', duration: 30000 }, // Rolling credits for 30 seconds
+        ];
+        
+        let currentStep = 0;
+
+        function showNextScreen() {
+            if (currentStep > 0) {
+                document.getElementById(sequence[currentStep - 1].id).classList.remove('visible');
+            }
+            if (currentStep < sequence.length) {
+                const screen = document.getElementById(sequence[currentStep].id);
+                screen.classList.add('visible');
+                setTimeout(showNextScreen, sequence[currentStep].duration);
+                currentStep++;
+            }
+        }
+
+        // Start the sequence on page load
+        window.onload = showNextScreen;
+    </script>
+</body>
+</html>
