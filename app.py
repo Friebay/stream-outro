@@ -26,7 +26,7 @@ def outro():
     top_emotes = top_emotes.to_dict(orient='records')
 
     # Pass data to template
-    return render_template('outro.html', emotes=emotes, emotes_default=emotes_default,
+    return render_template('index.html', emotes=emotes, emotes_default=emotes_default,
                            top_chatters=top_chatters, top_emotes=top_emotes)
 
 if __name__ == '__main__':

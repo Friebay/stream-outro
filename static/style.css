@@ -1,0 +1,63 @@
+/* Global text color and shadow */
+body,
+html,
+.screen p {
+    color: gold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Small shadow effect */
+}
+
+/* Basic styling for screens and text alignment */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+    font-family: 'Galindo', sans-serif;
+    color: white;
+    background-color: black;
+}
+
+.screen {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0s; /* Removing ease-in and ease-out */
+}
+
+.visible {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+.big-text {
+    font-size: 50px;
+}
+
+.small-image {
+    width: 50px;
+    height: auto;
+}
+
+/* Rolling credits animation */
+@keyframes roll {
+    from {
+        transform: translateY(70%);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.credits {
+    animation: roll 45s linear infinite;
+}
