@@ -5,13 +5,13 @@ audio.play();
 
 // Define the sequence of screens with their durations in milliseconds
 const sequence = [
-    { id: 'black-screen0', duration: 2000 },
-    { id: 'screen2', duration: 4000 },
-    { id: 'black-screen1', duration: 2000 },
-    { id: 'screen4', duration: 4000 },
-    { id: 'black-screen2', duration: 2000 },
-    { id: 'screen5', duration: 4000 },
-    { id: 'black-screen3', duration: 2000 },
+    { id: 'black-screen0', duration: 200 },
+    { id: 'screen2', duration: 400 },
+    { id: 'black-screen1', duration: 200 },
+    { id: 'screen4', duration: 400 },
+    { id: 'black-screen2', duration: 200 },
+    { id: 'screen5', duration: 400 },
+    { id: 'black-screen3', duration: 200 },
     { id: 'screen6', duration: 4000 },
     { id: 'black-screen4', duration: 2000 },
     { id: 'screen7', duration: 4000 },
