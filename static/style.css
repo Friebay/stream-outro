@@ -14,15 +14,9 @@ html,
 .role,
 .username,
 .big-text,
-h2,
-.credits {
+h2 {
     color: gold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.credits {
-    opacity: 0.1; /* Start invisible */
-    white-space: nowrap;
 }
 
 .screen {
@@ -59,23 +53,6 @@ h2,
     width: 50px;
     height: auto;
     margin: 10px;
-}
-
-.credits.rolling {
-    opacity: 1;
-    animation: roll 45s linear;
-}
-
-
-
-/* Credits roll */
-@keyframes roll {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(-100%);
-    }
 }
 
 /* Dot line styling */
