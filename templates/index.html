@@ -10,8 +10,6 @@
 </head>
 
 <body>
-
-    <!-- Sequence screens displayed at the top of the viewport -->
     <div class="screen" id="black-screen0"></div>
     <div class="screen" id="screen2">
         <img src="{{ url_for('static', filename='images/logo.jpg') }}" style="opacity: 0.8;">
@@ -29,6 +27,7 @@
         <p>Starred by</p>
         <p class="big-text">
             deMiko <img src="{{ url_for('static', filename='images/demikoL.webp') }}" class="small-image">
+            <br>
             Sushi <img src="{{ url_for('static', filename='images/sushisL.webp') }}" class="small-image">
         </p>
     </div>
@@ -37,20 +36,20 @@
 
     <div class="screen" id="screen6">
         <p>Total amount of chatters</p>
-        <p class="big-text">{{ top_chatters | length }}</p>
+        <p class="big-text">{{ chatters_amount }}</p>
         <p>New chatters</p>
-        <p class="big-text">{{ top_chatters | length }}</p>
+        <p class="big-text">{{ new_chatters_amount }}</p>
         <p>Total amount of messages</p>
-        <p class="big-text">{{ top_emotes | length }}</p>
+        <p class="big-text">{{ message_amount }}</p>
     </div>
 
     <div class="screen" id="black-screen4"></div>
 
     <div class="screen" id="screen7">
-        <p>Different emotes</p>
-        <p class="big-text">{{ emotes | length + emotes_default | length }}</p>
+        <p>Unique emotes</p>
+        <p class="big-text">{{ unique_emote_amount }}</p>
         <p>Total emotes</p>
-        <p class="big-text">{{ top_emotes | length }}</p>
+        <p class="big-text">{{ emote_amount }}</p>
     </div>
 
     <div class="screen" id="black-screen5"></div>
@@ -65,60 +64,58 @@
     <div class="screen" id="screen9">
         <p class="left-aligned">Most Messages</p>
         <div class="chatter-table">
-            <div class="chatter-row">
-                <p>{{ top_1_chatter_username }}: {{ top_1_chatter_username_message_amount }}</p>
-                <p>{{ top_2_chatter_username }}: {{ top_2_chatter_username_message_amount }}</p>
-                <p>{{ top_3_chatter_username }}: {{ top_3_chatter_username_message_amount }}</p>
-            </div>
-            <div class="chatter-row">
-                <p>{{ top_4_chatter_username }}: {{ top_4_chatter_username_message_amount }}</p>
-                <p>{{ top_5_chatter_username }}: {{ top_5_chatter_username_message_amount }}</p>
-                <p>{{ top_6_chatter_username }}: {{ top_6_chatter_username_message_amount }}</p>
-            </div>
-            <div class="chatter-row">
-                <p>{{ top_7_chatter_username }}: {{ top_7_chatter_username_message_amount }}</p>
-                <p>{{ top_8_chatter_username }}: {{ top_8_chatter_username_message_amount }}</p>
-                <p>{{ top_9_chatter_username }}: {{ top_9_chatter_username_message_amount }}</p>
-            </div>
-            <div class="chatter-row">
-                <p>{{ top_10_chatter_username }}: {{ top_10_chatter_username_message_amount }}</p>
-            </div>
+            {% for chatter in top_chatters %}
+                {% if loop.index0 % 3 == 0 %}
+                    <div class="chatter-row"> <!-- Start a new row every 3 items -->
+                {% endif %}
+                <p>{{ chatter.username }}: {{ chatter.message_amount }}</p>
+                {% if loop.index0 % 3 == 2 or loop.last %}
+                    </div> <!-- End the row after every 3 items or at the end of the list -->
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
+    
     
     <div class="screen" id="black-screen7"></div>
 
     <div class="screen" id="screen10">
         <p class="left-aligned">Top Emotes</p>
         <div class="emote-table">
-            <div class="emote-row">
-                <p><img src="{{ top_1_emote_webp }}" alt="{{ top_1_emote_name }}" class="small-image"> ({{ top_1_emote_name }}) {{ top_1_emote_amount }}</p>
-                <p><img src="{{ top_2_emote_webp }}" alt="{{ top_2_emote_name }}" class="small-image"> ({{ top_2_emote_name }}) {{ top_2_emote_amount }}</p>
-                <p><img src="{{ top_3_emote_webp }}" alt="{{ top_3_emote_name }}" class="small-image"> ({{ top_3_emote_name }}) {{ top_3_emote_amount }}</p>
-            </div>
-            <div class="emote-row">
-                <p><img src="{{ top_4_emote_webp }}" alt="{{ top_4_emote_name }}" class="small-image"> ({{ top_4_emote_name }}) {{ top_4_emote_amount }}</p>
-                <p><img src="{{ top_5_emote_webp }}" alt="{{ top_5_emote_name }}" class="small-image"> ({{ top_5_emote_name }}) {{ top_5_emote_amount }}</p>
-                <p><img src="{{ top_6_emote_webp }}" alt="{{ top_6_emote_name }}" class="small-image"> ({{ top_6_emote_name }}) {{ top_6_emote_amount }}</p>
-            </div>
-            <div class="emote-row">
-                <p><img src="{{ top_7_emote_webp }}" alt="{{ top_7_emote_name }}" class="small-image"> ({{ top_7_emote_name }}) {{ top_7_emote_amount }}</p>
-                <p><img src="{{ top_8_emote_webp }}" alt="{{ top_8_emote_name }}" class="small-image"> ({{ top_8_emote_name }}) {{ top_8_emote_amount }}</p>
-                <p><img src="{{ top_9_emote_webp }}" alt="{{ top_9_emote_name }}" class="small-image"> ({{ top_9_emote_name }}) {{ top_9_emote_amount }}</p>
-            </div>
-            <div class="emote-row">
-                <p><img src="{{ top_10_emote_webp }}" alt="{{ top_10_emote_name }}" class="small-image"> ({{ top_10_emote_name }}) {{ top_10_emote_amount }}</p>
-            </div>
+            {% for emote in top_emotes %}
+                {% if loop.index0 % 3 == 0 %}
+                    <div class="emote-row"> <!-- Start a new row every 3 items -->
+                {% endif %}
+                <p>
+                    <img src="{{ emote.webp }}" alt="{{ emote.name }}" class="small-image"> 
+                    ({{ emote.name }}) {{ emote.amount }}
+                </p>
+                {% if loop.index0 % 3 == 2 or loop.last %}
+                    </div> <!-- End the row after every 3 items or at the end of the list -->
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
     
+    
     <div class="screen" id="black-screen8"></div>
     
+    <div class="screen" id="screen11">
+        <p>We need</p>
+        <p class="big-text">{{ subscirber_amount }}</p>
+        <p>until deMiko tries hobby horsing</p>
+    </div>
+
+    <div class="screen" id="black-screen9"></div>
 
     <div class="screen" id="credits-roll">
         <div class="credits">
-            {% for chatter in top_chatters %}
-                <p>{{ chatter['Username'] }} - First message at {{ chatter.get('First Message Time', '') }}</p>
+            {% for chatter in chatters %}
+                <p>
+                    {{ chatter.timestamp }}
+                    <br>
+                    {{ chatter.username }}
+                </p>
             {% endfor %}
         </div>
     </div>
