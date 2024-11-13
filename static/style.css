@@ -1,26 +1,36 @@
 body,
-html,
-.screen p {
-    color: gold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-body,
 html {
     margin: 0;
     padding: 0;
     overflow: hidden;
     font-family: 'Galindo', sans-serif;
-    color: white;
     background-color: black;
 }
 
+/* Base text color */
+body,
+html,
+.screen p,
+.role,
+.username,
+.big-text,
+h2,
+.credits {
+    color: gold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.credits {
+    opacity: 0.1; /* Start invisible */
+    white-space: nowrap;
+}
+
 .screen {
-    display: none;
+    width: 100%;
+    margin: 0;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -28,7 +38,9 @@ html {
     flex-direction: column;
     text-align: center;
     opacity: 0;
-    transition: opacity 0s;
+    transition: opacity 0.5s;
+    padding: 40px;
+    background: black;
 }
 
 .visible {
@@ -36,82 +48,267 @@ html {
     opacity: 1 !important;
 }
 
+/* Simple static text sizes */
 .big-text {
     font-size: 50px;
+    margin: 10px 0;
 }
 
+/* Image styling */
 .small-image {
     width: 50px;
     height: auto;
+    margin: 10px;
 }
 
+.credits.rolling {
+    opacity: 1;
+    animation: roll 45s linear;
+}
+
+
+
+/* Credits roll */
 @keyframes roll {
     from {
         transform: translateY(100%);
     }
-
     to {
         transform: translateY(-100%);
     }
 }
 
-.credits {
-    animation: roll 45s linear infinite;
-}
-
-/* Left-aligned text for the "Most Messages" section */
-.left-aligned {
-    text-align: left;
-    font-size: 40px;
-    color: gold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Small shadow effect */
-}
-
-/* Chatter table layout */
-.chatter-table {
+/* Dot line styling */
+.dot-line {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
-}
-
-.chatter-row {
-    display: flex;
-    justify-content: space-between;
+    align-items: baseline;
     width: 100%;
-    margin-bottom: 10px;
-}
-
-.chatter-row p {
+    max-width: 800px;
+    margin: 15px 0;
+    white-space: nowrap;
     font-size: 30px;
-    color: gold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+.role {
+    flex-shrink: 0;
+    margin-right: 12px;
+}
 
-/* Emote table layout */
+.dots {
+    flex-grow: 1;
+    margin: 0 8px;
+    height: 1em;
+    border-bottom: 2px dotted gold;
+}
+
+.username {
+    flex-shrink: 0;
+    margin-left: 12px;
+    text-align: right;
+}
+
+/* Tables */
+.chatter-table,
 .emote-table {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
 }
 
+.chatter-row,
 .emote-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
-    margin-bottom: 10px;
+    margin: 10px 0;
+    padding: 10px 20px;
 }
 
+.chatter-row p,
 .emote-row p {
     font-size: 30px;
+    margin: 0;
+}
+
+/* Simple responsive adjustments */
+@media (max-width: 768px) {
+    .dot-line {
+        font-size: 24px;
+    }
+    
+    .role,
+    .username {
+        max-width: 45%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .big-text {
+        font-size: 40px;
+    }
+}
+
+.stats-title {
+    font-size: 40px;
     color: gold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.chatter-table {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.chatter-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.chatter-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 215, 0, 0.3); /* Subtle golden border */
+    min-width: 0; /* Enables text truncation */
+}
+
+.username-text {
+    color: gold;
+    font-size: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+    max-width: 70%; /* Ensures space for the message count */
+}
+
+.message-count {
+    color: gold;
+    font-size: 24px;
+    white-space: nowrap;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .chatter-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .chatter-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-title {
+        font-size: 32px;
+    }
+    
+    .username-text,
+    .message-count {
+        font-size: 20px;
+    }
+}
+
+.stats-title {
+    font-size: 40px;
+    color: gold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.emote-table {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.emote-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.emote-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    min-width: 0; /* Enables text truncation */
+}
+
+.emote-info {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    margin-right: 10px;
 }
 
 .small-image {
     width: 30px;
-    height: auto;
+    height: 30px;
     margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.emote-name {
+    color: gold;
+    font-size: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emote-count {
+    color: gold;
+    font-size: 24px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .emote-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .emote-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-title {
+        font-size: 32px;
+    }
+    
+    .emote-name,
+    .emote-count {
+        font-size: 20px;
+    }
+    
+    .small-image {
+        width: 25px;
+        height: 25px;
+    }
 }

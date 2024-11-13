@@ -26,14 +26,14 @@ def outro():
     emotes_default = emotes_default.to_dict(orient='records')
     top_chatters = [
         {"username": "User1", "message_amount": 120},
-        {"username": "User2", "message_amount": 105},
-        {"username": "User1", "message_amount": 100},
-        {"username": "User2", "message_amount": 96},
+        {"username": "Use12r2", "message_amount": 105},
+        {"username": "User6", "message_amount": 100},
+        {"username": "Ur4", "message_amount": 96},
         {"username": "User1", "message_amount": 80},
         {"username": "User2", "message_amount": 70},
-        {"username": "User1", "message_amount": 60},
+        {"username": "Usewwwwwwwwr1", "message_amount": 60},
         {"username": "User2", "message_amount": 20},
-        {"username": "User1", "message_amount": 10},
+        {"username": "dsadsadsa", "message_amount": 10},
         {"username": "User2", "message_amount": 1}
     ]
     top_emotes = [
