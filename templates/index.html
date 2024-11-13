@@ -137,11 +137,11 @@
 
     <div class="screen" id="black-screen9"></div>
 
-    <div class="screen">
+    <div id="screen-credits" class="screen">
         <div class="credits">
             {% for chatter in chatters %}
                 <p>
-                    {{ chatter.timestamp }}
+                    <span class="timestamp">{{ chatter.timestamp }}</span>
                     <br>
                     {{ chatter.username }}
                 </p>

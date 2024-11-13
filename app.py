@@ -1,7 +1,12 @@
 from flask import Flask, render_template
 import pandas as pd
 import os
-
+import json
+from collections import Counter
+import csv
+import re
+from collections import defaultdict
+    
 app = Flask(__name__)
 
 # File paths
@@ -21,10 +26,7 @@ def outro():
         subscirber_amount = int(file.read().strip())
 
     # Print the result
-    print("subscirber_amount =", subscirber_amount)
-
-    import json
-    from collections import Counter
+    # print("subscirber_amount =", subscirber_amount)
 
     # Path to the .jsonl file
     file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
@@ -55,6 +57,8 @@ def outro():
 
     # Format the first message timestamps for each unique user
     chatters = [{"timestamp": first_message_timestamps[user], "username": user} for user in first_message_timestamps]
+    
+    print(chatters)
 
     # Convert the counter to the desired format
     top_chatters = [{"username": user, "message_amount": count} for user, count in username_counter.most_common(18)]
@@ -91,11 +95,6 @@ def outro():
     chatters_amount = len(unique_chatters)
     new_chatters_amount = new_chatters_count
     message_amount = message_count
-    
-    
-    import json
-    import csv
-    import re
 
     # Paths to the files
     chat_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
@@ -144,11 +143,6 @@ def outro():
     
     unique_emote_amount = unique_emote_amount
     
-    import json
-    import csv
-    import re
-    from collections import Counter
-
     # Paths to the files
     chat_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
     emotes_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\emotes.csv"
@@ -201,10 +195,6 @@ def outro():
         for emote, count in emote_counter.most_common(18)
     ]
     
-    import json
-    import re
-    from collections import defaultdict
-
     # Path to the chat file
     chat_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
 
@@ -226,7 +216,8 @@ def outro():
             
             # Count the mentions for this user
             if mentions:
-                print(f"{username} mentioned: {mentions}")  # Debug: print the mentions
+                # print(f"{username} mentioned: {mentions}")  # Debug: print the mentions
+                pass
             user_mentions_count[username] += len(mentions)
 
     # Sort the users by the number of mentions (in descending order)
@@ -236,22 +227,15 @@ def outro():
     top_10_mentioners = sorted_mentions[:10]
 
     # Display the top 10 mentioners
-    print("\nTop 10 mentioners:")
-    for idx, (username, mentions) in enumerate(top_10_mentioners, start=1):
-        print(f"{idx}. {username}: {mentions} mentions")
+    # print("\nTop 10 mentioners:")
+    # for idx, (username, mentions) in enumerate(top_10_mentioners, start=1):
+    #     print(f"{idx}. {username}: {mentions} mentions")
 
     # Find the user who mentioned others the most times
     person_who_mentioned_others_the_most_times = sorted_mentions[0][0]
 
     # Print the final result
-    print(f'\nperson_who_mentioned_others_the_most_times = "{person_who_mentioned_others_the_most_times}"')
-
-
-    
-    import json
-    import csv
-    import re
-    from collections import defaultdict
+    # print(f'\nperson_who_mentioned_others_the_most_times = "{person_who_mentioned_others_the_most_times}"')
 
     # Paths to the files
     chat_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
@@ -296,7 +280,7 @@ def outro():
     person_who_typed_the_most_emotes = max(user_emote_counts, key=user_emote_counts.get)
 
     # Print the result
-    print("person_who_typed_the_most_emotes =", f'"{person_who_typed_the_most_emotes}"')
+    # print("person_who_typed_the_most_emotes =", f'"{person_who_typed_the_most_emotes}"')
 
     
     # Pass data to template

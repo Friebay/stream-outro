@@ -288,3 +288,60 @@ h2 {
         height: 25px;
     }
 }
+
+/* Credits screen container */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+/* Credits content container */
+.credits {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    max-width: 800px;
+    transform: translateY(100%);
+    color: #fff;
+    text-align: center;
+    animation: scrollCredits 600s linear forwards;
+}
+
+/* Individual credit entries */
+.credits p {
+    margin: 2em 0;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.credits .timestamp {
+    font-size: 0.9em;
+    color: #888;
+}
+
+/* Scrolling animation */
+@keyframes scrollCredits {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+/* Make sure the screen is initially hidden and fades in when visible class is added */
+#screen-credits {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#screen-credits.visible {
+    opacity: 1;
+}
