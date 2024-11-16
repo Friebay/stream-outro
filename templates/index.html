@@ -17,34 +17,33 @@
     <div class="screen" id="black-screen1"></div>
 
     <div class="screen" id="screen4">
-        <p>Director and Writer</p>
+        <p class="medium-text">Režisierius ir Rašytojas</p>
         <p class="big-text">deMiko</p>
     </div>
 
     <div class="screen" id="black-screen2"></div>
 
     <div class="screen" id="screen5">
-        <p>Starred by</p>
+        <p class="medium-text">Vaidino</p>
         <p class="big-text">
-            deMiko <img src="{{ url_for('static', filename='images/demikoL.webp') }}" class="small-image">
-            Sushi <img src="{{ url_for('static', filename='images/sushisL.webp') }}" class="small-image">
+            deMiko <img src="{{ url_for('static', filename='images/demikoL.webp') }}" class="profile-image"><br>
+            Sušis <img src="{{ url_for('static', filename='images/sushisL.webp') }}" class="profile-image">
         </p>
     </div>
 
     <div class="screen" id="black-screen3"></div>
 
     <div id="screen6" class="screen">
-        <h2>Stream Statistics</h2>
         <div class="stat-number">
-            <p>Total Chatters</p>
+            <p class="medium-text">Iš Viso Pokalbiautojų</p>
             <div class="big-text">{{ chatters_amount }}</div>
         </div>
         <div class="stat-number">
-            <p>New Chatters</p>
+            <p class="medium-text">Naujų Pokalbiautojų</p>
             <div class="big-text">{{ new_chatters_amount }}</div>
         </div>
         <div class="stat-number">
-            <p>Total Messages</p>
+            <p class="medium-text">Iš Viso Žinučių</p>
             <div class="big-text">{{ message_amount }}</div>
         </div>
     </div>
@@ -52,13 +51,12 @@
     <div class="screen" id="black-screen4"></div>
 
     <div id="screen7" class="screen">
-        <h2>Emote Stats</h2>
         <div class="stat-number">
-            <p>Unique Emotes</p>
+            <p class="medium-text">Išskirtinių Emociukų</p>
             <div class="big-text">{{ unique_emote_amount }}</div>
         </div>
         <div class="stat-number">
-            <p>Total Emotes</p>
+            <p class="medium-text">Iš Viso Emociukų</p>
             <div class="big-text">{{ emote_amount }}</div>
         </div>
     </div>
@@ -67,12 +65,12 @@
 
     <div id="screen8" class="screen">
         <div class="dot-line">
-            <span class="role">The Mentioner</span>
+            <span class="role">Paminėtojas</span>
             <span class="dots"></span>
             <span class="username">{{ person_who_mentioned_others_the_most_times }}</span>
         </div>
         <div class="dot-line">
-            <span class="role">The Emotional</span>
+            <span class="role">Emocionalus</span>
             <span class="dots"></span>
             <span class="username">{{ person_who_typed_the_most_emotes }}</span>
         </div>
@@ -81,7 +79,7 @@
     <div class="screen" id="black-screen6"></div>
 
     <div class="screen" id="screen9">
-        <h2 class="stats-title">Most Messages</h2>
+        <h2 class="stats-title">Daugiausia Išsiųstų Žinučių</h2>
         <div class="chatter-table">
             {% for chatter in top_chatters %}
                 {% if loop.index0 % 3 == 0 %}
@@ -104,7 +102,7 @@
     <div class="screen" id="black-screen7"></div>
 
     <div class="screen" id="screen10">
-        <h2 class="stats-title">Top Emotes</h2>
+        <h2 class="stats-title">Populiariausi Emociukai</h2>
         <div class="emote-table">
             {% for emote in top_emotes %}
                 {% if loop.index0 % 3 == 0 %}
@@ -113,8 +111,8 @@
                 
                 <div class="emote-cell">
                     <div class="emote-info">
-                        <img src="{{ emote.webp }}" alt="{{ emote.name }}" class="small-image">
-                        <span class="emote-name">({{ emote.name }})</span>
+                        <img src="{{ emote.webp }}" alt="{{ emote.name }}" class="emote-image">
+                        <span class="emote-name">&emsp;({{ emote.name }})</span>
                     </div>
                     <span class="emote-count">{{ emote.amount }}</span>
                 </div>
@@ -130,9 +128,9 @@
     <div class="screen" id="black-screen8"></div>
     
     <div class="screen" id="screen11">
-        <p>We need</p>
+        <p class="medium-text">Trūksta</p>
         <p class="big-text">{{ subscirber_amount }}</p>
-        <p>until deMiko tries hobby horsing</p>
+        <p class="medium-text">prenumeratų YouTube kanale<br>iki <i>Hobby Horsing</i> išbandymo</p>
     </div>
 
     <div class="screen" id="black-screen9"></div>
@@ -149,9 +147,10 @@
         </div>
     </div>
 
-    <audio id="backgroundMusic" src="{{ url_for('static', filename='songs/Exitlude.mp3') }}" autoplay></audio>
+    <audio id="backgroundMusic" preload="auto" controls>
+        <source src="{{ url_for('static', filename='songs/Exitlude.mp3') }}" type="audio/mp3">
+    </audio>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
-
 </html>
