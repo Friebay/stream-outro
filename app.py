@@ -29,7 +29,7 @@ def outro():
             data = json.loads(line)
             username = data.get("username")
             timestamp = data.get("timestamp")
-            timestamp = timestamp.replace("T", "")
+            timestamp = timestamp.replace("T", " ")
             
             if username:
                 username_counter[username] += 1

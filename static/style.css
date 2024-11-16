@@ -261,12 +261,11 @@ h2 {
     color: gold;
 }
 
-/* Scrolling animation */
 @keyframes scrollCredits {
-    from {
+    0% {
         transform: translateY(100%);
     }
-    to {
+    100% {
         transform: translateY(-100%);
     }
 }
@@ -280,6 +279,7 @@ h2 {
 #screen-credits.visible {
     opacity: 1;
 }
+
 @media (max-width: 1200px) {
     .chatter-row,
     .emote-row {
