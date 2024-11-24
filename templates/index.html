@@ -67,9 +67,14 @@
 
     <div id="screen8" class="screen">
         <div class="dot-line">
-            <span class="role">Paminėtojas</span>
+            <span class="role">Visus prisišaukiantis</span>
             <span class="dots"></span>
-            <span class="username">{{ person_who_mentioned_others_the_most_times }}</span>
+            <span class="username">{{ person_who_mentioned_most_unique_people }}</span>
+        </div>
+        <div class="dot-line">
+            <span class="role">Populiariausias</span>
+            <span class="dots"></span>
+            <span class="username">{{ person_who_was_mentioned_the_most_times }}</span>
         </div>
         <div class="dot-line">
             <span class="role">Emocionalus</span>
@@ -128,12 +133,20 @@
     
     
     <div class="screen" id="black-screen8"></div>
-    
+
+    <div class="screen" id="screen11">
+        <p class="medium-text">Trūksta</p>
+        <p class="big-text">{{ follower_amount }}</p>
+        <p class="medium-text">sekėjų iki 10 000 sekėjų Twitch platformoje.</p>
+    </div>
+
+    <!--
     <div class="screen" id="screen11">
         <p class="medium-text">Trūksta</p>
         <p class="big-text">{{ subscirber_amount }}</p>
         <p class="medium-text">prenumeratų YouTube kanale<br>iki <i>Hobby Horsing</i> išbandymo</p>
     </div>
+    -->
 
     <div class="screen" id="black-screen9"></div>
 
@@ -149,7 +162,7 @@
         </div>
     </div>
 
-    <audio id="backgroundMusic" preload="auto" controls>
+    <audio id="backgroundMusic" preload="auto">
         <source src="{{ url_for('static', filename='songs/Exitlude.mp3') }}" type="audio/mp3">
     </audio>
 
@@ -160,27 +173,31 @@
         audio.play();
 
         // Define the sequence of screens with their durations in milliseconds
+        const BLACK_SCREEN_DURATION = 20;
+        const SCREEN_DURATION = 2000;
+        const CREDITS_DURATION = 600000;
+
         const sequence = [
-            { id: 'black-screen0', duration: 20 },
-            { id: 'screen2', duration: 40 },
-            { id: 'black-screen1', duration: 20 },
-            { id: 'screen4', duration: 40 },
-            { id: 'black-screen2', duration: 20 },
-            { id: 'screen5', duration: 40 },
-            { id: 'black-screen3', duration: 20 },
-            { id: 'screen6', duration: 40 },
-            { id: 'black-screen4', duration: 20 },
-            { id: 'screen7', duration: 40 },
-            { id: 'black-screen5', duration: 20 },
-            { id: 'screen8', duration: 40 },
-            { id: 'black-screen6', duration: 20 },
-            { id: 'screen9', duration: 80 },
-            { id: 'black-screen7', duration: 20 },
-            { id: 'screen10', duration: 80 },
-            { id: 'black-screen8', duration: 20 },
-            { id: 'screen11', duration: 80 },
-            { id: 'black-screen9', duration: 20 },
-            { id: 'screen-credits', duration: 600000 }
+            { id: 'black-screen0', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen2', duration: SCREEN_DURATION },
+            { id: 'black-screen1', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen4', duration: SCREEN_DURATION },
+            { id: 'black-screen2', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen5', duration: SCREEN_DURATION },
+            { id: 'black-screen3', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen6', duration: SCREEN_DURATION },
+            { id: 'black-screen4', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen7', duration: SCREEN_DURATION },
+            { id: 'black-screen5', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen8', duration: SCREEN_DURATION },
+            { id: 'black-screen6', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen9', duration: SCREEN_DURATION },
+            { id: 'black-screen7', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen10', duration: SCREEN_DURATION },
+            { id: 'black-screen8', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen11', duration: SCREEN_DURATION },
+            { id: 'black-screen9', duration: BLACK_SCREEN_DURATION },
+            { id: 'screen-credits', duration: CREDITS_DURATION }
         ];
 
         let currentStep = 0;
@@ -220,7 +237,7 @@
                     audio.removeAttribute("controls");
                     
                     // Set volume to ensure it's not muted
-                    audio.volume = 0.75;
+                    audio.volume = 0.5;
                     
                     // Set the time and play
                     audio.currentTime = 34;

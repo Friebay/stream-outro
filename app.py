@@ -9,12 +9,143 @@ from collections import defaultdict
     
 app = Flask(__name__)
 
+def find_most_mentioned_person(chat_file_path):
+    # Regular expression pattern to detect mentions
+    # Updated to include underscores and numbers which are common in usernames
+    mention_pattern = re.compile(r'(?<!\w)@([a-zA-Z0-9_]{1,})')
+    
+    # Dictionary to store the mention count for each mentioned user
+    mentioned_users_count = defaultdict(int)
+    
+    try:
+        # Process each message in the chat.jsonl file
+        with open(chat_file_path, "r", encoding="utf-8") as chat_file:
+            for line_number, line in enumerate(chat_file, 1):
+                try:
+                    # Parse JSON line
+                    data = json.loads(line)
+                    message = data.get("message", "")
+                    
+                    # Find all mentions in the message
+                    mentions = mention_pattern.findall(message)
+                    
+                    # Count each mention
+                    for mentioned_user in mentions:
+                        mentioned_users_count[mentioned_user.lower()] += 1
+                    
+                except json.JSONDecodeError as e:
+                    print(f"Error parsing JSON on line {line_number}: {e}")
+                    continue
+                except Exception as e:
+                    print(f"Error processing line {line_number}: {e}")
+                    continue
+        
+        if not mentioned_users_count:
+            return None, 0
+        
+        # Sort the users by the number of times they were mentioned (in descending order)
+        sorted_mentions = sorted(mentioned_users_count.items(), 
+                               key=lambda x: (x[1], x[0]), 
+                               reverse=True)
+        
+        # Get the most mentioned person and their mention count
+        most_mentioned_person = sorted_mentions[0][0]
+        mention_count = sorted_mentions[0][1]
+        
+        # Print full statistics
+        print("\nMention Statistics:")
+        for user, count in sorted_mentions:
+            print(f"@{user}: mentioned {count} times")
+            
+        return most_mentioned_person, mention_count
+        
+    except FileNotFoundError:
+        print(f"Error: Chat file not found at {chat_file_path}")
+        return None, 0
+    except Exception as e:
+        print(f"Error: An unexpected error occurred: {e}")
+        return None, 0
+
+def find_person_with_most_unique_mentions(chat_file_path):
+    # Regular expression pattern to detect mentions
+    mention_pattern = re.compile(r'(?<!\w)@([a-zA-Z0-9_]{1,})')
+    
+    # Dictionary to store the set of unique users mentioned by each person
+    user_unique_mentions = defaultdict(set)
+    
+    try:
+        # Process each message in the chat.jsonl file
+        with open(chat_file_path, "r", encoding="utf-8") as chat_file:
+            for line_number, line in enumerate(chat_file, 1):
+                try:
+                    # Parse JSON line
+                    data = json.loads(line)
+                    username = data.get("username", "").lower()
+                    message = data.get("message", "")
+                    
+                    # Find all mentions in the message
+                    mentions = mention_pattern.findall(message)
+                    
+                    # Add mentioned users to the set for this username
+                    for mentioned_user in mentions:
+                        # Don't count if someone mentions themselves
+                        if mentioned_user.lower() != username:
+                            user_unique_mentions[username].add(mentioned_user.lower())
+                    
+                except json.JSONDecodeError as e:
+                    print(f"Error parsing JSON on line {line_number}: {e}")
+                    continue
+                except Exception as e:
+                    print(f"Error processing line {line_number}: {e}")
+                    continue
+        
+        if not user_unique_mentions:
+            return None, 0, None
+        
+        # Convert sets to lengths and sort users by number of unique mentions
+        unique_mention_counts = {
+            username: len(mentions) 
+            for username, mentions in user_unique_mentions.items()
+        }
+        
+        sorted_users = sorted(
+            unique_mention_counts.items(),
+            key=lambda x: (x[1], x[0]),  # Sort by count first, then username
+            reverse=True
+        )
+        
+        # Get the user who mentioned the most unique people
+        top_user = sorted_users[0][0]
+        unique_count = sorted_users[0][1]
+        mentioned_users = sorted(user_unique_mentions[top_user])  # Sort for consistent output
+        
+        # Print statistics
+        print("\nUnique Mention Statistics:")
+        for username, count in sorted_users:
+            if count > 0:  # Only show users who mentioned others
+                print(f"{username}: mentioned {count} unique users")
+                print(f"  Mentioned: @{', @'.join(sorted(user_unique_mentions[username]))}")
+        
+        return top_user, unique_count, mentioned_users
+        
+    except FileNotFoundError:
+        print(f"Error: Chat file not found at {chat_file_path}")
+        return None, 0, None
+    except Exception as e:
+        print(f"Error: An unexpected error occurred: {e}")
+        return None, 0, None
+
 @app.route('/')
 def outro():
     subscribers_needed_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\subscribers_needed.txt"
 
     with open(subscribers_needed_path, "r", encoding="utf-8") as file:
         subscirber_amount = int(file.read().strip())
+        
+    followers_needed_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\follower_goal.txt"
+
+    with open(followers_needed_path, "r", encoding="utf-8") as file:
+        follower_amount = int(file.read().strip())
 
     chat_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
     emotes_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\emotes.csv"
@@ -158,31 +289,23 @@ def outro():
         }
         for emote, count in emote_counter.most_common(18)
     ]
+    
+    most_mentioned, count = find_most_mentioned_person(chat_file_path)
+    
+    if most_mentioned:
+        print(f"\nMost mentioned person: @{most_mentioned}")
+        print(f"Times mentioned: {count}")
+    else:
+        print("No mentions found in the chat log.")
 
-    # Regular expression pattern to detect mentions
-    mention_pattern = re.compile(r'(?<!\w)@([a-zA-Z]{3,})')
-
-    # Dictionary to store the mention count for each user
-    user_mentions_count = defaultdict(int)
-
-    # Process each message in the chat.jsonl file
-    with open(chat_file_path, "r", encoding="utf-8") as chat_file:
-        for line in chat_file:
-            data = json.loads(line)
-            username = data.get("username")
-            message = data.get("message", "")
-            
-            mentions = mention_pattern.findall(message)
-            
-            if mentions:
-                pass
-            user_mentions_count[username] += len(mentions)
-
-    # Sort the users by the number of mentions (in descending order)
-    sorted_mentions = sorted(user_mentions_count.items(), key=lambda x: x[1], reverse=True)
-
-    # Find the user who mentioned others the most times
-    person_who_mentioned_others_the_most_times = sorted_mentions[0][0]
+    top_mentioner, unique_count, mentioned_users = find_person_with_most_unique_mentions(chat_file_path)
+        
+    if top_mentioner:
+        print(f"\nUser who mentioned the most unique people: {top_mentioner}")
+        print(f"Number of unique people mentioned: {unique_count}")
+        print(f"Users they mentioned: @{', @'.join(mentioned_users)}")
+    else:
+        print("No mentions found in the chat log.")
 
     emote_names = set()
 
@@ -215,8 +338,8 @@ def outro():
     return render_template('index.html', top_chatters=top_chatters, top_emotes=top_emotes, subscirber_amount=subscirber_amount,
                            chatters_amount=chatters_amount, new_chatters_amount=new_chatters_amount,
                            message_amount=message_amount, unique_emote_amount=unique_emote_amount, emote_amount=emote_amount, 
-                           person_who_mentioned_others_the_most_times=person_who_mentioned_others_the_most_times, person_who_typed_the_most_emotes=person_who_typed_the_most_emotes,
-                           chatters=chatters)
+                           person_who_mentioned_most_unique_people = top_mentioner, person_who_typed_the_most_emotes=person_who_typed_the_most_emotes,
+                           chatters=chatters, follower_amount=follower_amount, person_who_was_mentioned_the_most_times = most_mentioned)
 
 
 if __name__ == '__main__':
