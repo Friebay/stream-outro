@@ -8,13 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Added preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='demiko/style.css') }}">
 </head>
 
 <body>
     <div class="screen" id="black-screen0"></div>
     <div class="screen" id="screen2">
-        <img src="{{ url_for('static', filename='images/logo.jpg') }}" style="opacity: 0.8;">
+        <img src="{{ url_for('static', filename='demiko/images/logo.jpg') }}" style="opacity: 0.8;">
     </div>
     <div class="screen" id="black-screen1"></div>
 
@@ -24,15 +24,6 @@
     </section>
 
     <div class="screen" id="black-screen2"></div>
-	<!--
-    <div class="screen" id="screen5">
-        <p class="medium-text">Vaidino</p>
-        <p class="big-text">
-            deMiko <img src="{{ url_for('static', filename='images/demikoL.webp') }}" class="profile-image"><br>
-            Sušis <img src="{{ url_for('static', filename='images/sushisL.webp') }}" class="profile-image">
-        </p>
-    </div>
-	-->
 
     <div class="screen" id="black-screen3"></div>
 
@@ -83,7 +74,7 @@
             <span class="username">{{ person_who_typed_the_most_emotes }}</span>
         </div>
     </div>
-    
+
     <div class="screen" id="black-screen6"></div>
 
     <div class="screen" id="screen9">
@@ -93,20 +84,20 @@
                 {% if loop.index0 % 3 == 0 %}
                     <div class="chatter-row">
                 {% endif %}
-                
+
                 <div class="chatter-cell">
                     <span class="username-text">{{ chatter.username }}</span>
                     <span class="message-count">{{ chatter.message_amount }}</span>
                 </div>
-    
+
                 {% if loop.index0 % 3 == 2 or loop.last %}
                     </div>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
-    
-    
+
+
     <div class="screen" id="black-screen7"></div>
 
     <div class="screen" id="screen10">
@@ -116,7 +107,7 @@
                 {% if loop.index0 % 3 == 0 %}
                     <div class="emote-row">
                 {% endif %}
-                
+
                 <div class="emote-cell">
                     <div class="emote-info">
                         <img src="{{ emote.webp }}" alt="{{ emote.name }}" class="emote-image">
@@ -124,21 +115,21 @@
                     </div>
                     <span class="emote-count">{{ emote.amount }}</span>
                 </div>
-    
+
                 {% if loop.index0 % 3 == 2 or loop.last %}
                     </div>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
-    
-    
+
+
     <div class="screen" id="black-screen8"></div>
 
     <div class="screen" id="screen11">
-        <p class="medium-text">Trūksta</p>
-        <p class="big-text">{{ follower_amount }}</p>
-        <p class="medium-text">sekėjų iki 10 000 sekėjų Twitch platformoje.</p>
+        <p class="medium-text">Hobby Horsing išbandymas</p>
+        <p class="big-text">kai deMiko kanalas pasieks</p>
+        <p class="medium-text">200 000 prenumeratų!</p>
     </div>
 
     <!--
@@ -164,41 +155,35 @@
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="{{ url_for('static', filename='songs/Exitlude.mp3') }}" type="audio/mp3">
+        <source src="{{ url_for('static', filename='demiko/songs/unlock_better.webm') }}" type="audio/webm">
     </audio>
 
     <script>
-        // Start audio playback from 34 seconds
+        // Start audio playback from 35 seconds
         const audio = document.getElementById("backgroundMusic");
-        audio.currentTime = 34; 
+        audio.currentTime = 1;
         audio.play();
 
         // Define the sequence of screens with their durations in milliseconds
-        const BLACK_SCREEN_DURATION = 20;
-        const SCREEN_DURATION = 2000;
-        const CREDITS_DURATION = 600000;
-
         const sequence = [
-            { id: 'black-screen0', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen2', duration: SCREEN_DURATION },
-            { id: 'black-screen1', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen4', duration: SCREEN_DURATION },
-            { id: 'black-screen2', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen5', duration: SCREEN_DURATION },
-            { id: 'black-screen3', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen6', duration: SCREEN_DURATION },
-            { id: 'black-screen4', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen7', duration: SCREEN_DURATION },
-            { id: 'black-screen5', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen8', duration: SCREEN_DURATION },
-            { id: 'black-screen6', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen9', duration: SCREEN_DURATION },
-            { id: 'black-screen7', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen10', duration: SCREEN_DURATION },
-            { id: 'black-screen8', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen11', duration: SCREEN_DURATION },
-            { id: 'black-screen9', duration: BLACK_SCREEN_DURATION },
-            { id: 'screen-credits', duration: CREDITS_DURATION }
+            { id: 'black-screen0', duration: 1000 },
+            { id: 'screen2', duration: 2000 },
+            { id: 'black-screen1', duration: 1000 },
+            { id: 'screen4', duration: 2000 },
+            { id: 'black-screen2', duration: 1000 },
+            { id: 'screen6', duration: 4000 },
+            { id: 'black-screen4', duration: 1000 },
+            { id: 'screen7', duration: 4000 },
+            { id: 'black-screen5', duration: 1000 },
+            { id: 'screen8', duration: 4000 },
+            { id: 'black-screen6', duration: 1000 },
+            { id: 'screen9', duration: 8000 },
+            { id: 'black-screen7', duration: 1000 },
+            { id: 'screen10', duration: 8000 },
+            { id: 'black-screen8', duration: 1000 },
+            { id: 'screen11', duration: 8000 },
+            { id: 'black-screen9', duration: 1000 },
+            { id: 'screen-credits', duration: 600000 }
         ];
 
         let currentStep = 0;
@@ -210,12 +195,12 @@
             if (currentStep < sequence.length) {
                 const screen = document.getElementById(sequence[currentStep].id);
                 screen.classList.add('visible');
-                
+
                 // If this is the credits screen, ensure the animation starts properly
                 if (sequence[currentStep].id === 'screen-credits') {
                     restartCredits();
                 }
-                
+
                 setTimeout(showNextScreen, sequence[currentStep].duration);
                 currentStep++;
             }
@@ -224,7 +209,7 @@
         // Improved audio handling
         document.addEventListener("DOMContentLoaded", function() {
             const audio = document.getElementById("backgroundMusic");
-            
+
             // Create a promise to handle audio loading
             const audioReady = new Promise((resolve, reject) => {
                 audio.addEventListener("canplaythrough", resolve);
@@ -236,16 +221,16 @@
                 .then(() => {
                     // Remove controls after loading (if you don't want them visible)
                     audio.removeAttribute("controls");
-                    
+
                     // Set volume to ensure it's not muted
-                    audio.volume = 0.5;
-                    
+                    audio.volume = 0.25;
+
                     // Set the time and play
-                    audio.currentTime = 34;
-                    
+                    audio.currentTime = 1;
+
                     // Play with error handling
                     const playPromise = audio.play();
-                    
+
                     if (playPromise !== undefined) {
                         playPromise
                             .then(() => {
@@ -271,19 +256,18 @@
             const entries = credits.querySelectorAll('p');
             const totalHeight = credits.scrollHeight; // Total height of the content
             const screenHeight = window.innerHeight; // Height of the visible screen
-            
+
             // Calculate duration: proportional to content height
-            const baseDuration = 10; // Base duration per screen height in seconds
-            const duration = (totalHeight / screenHeight) * baseDuration; 
-            
+            const baseDuration = 5; // Base duration per screen height in seconds
+            const duration = (totalHeight / screenHeight) * baseDuration;
+
             // Set dynamic animation duration
             credits.style.animation = 'none'; // Reset animation
             credits.offsetHeight; // Trigger reflow
             credits.style.animation = `scrollCredits ${duration}s linear forwards`;
-            
+
             console.log(`Scroll duration set to ${duration.toFixed(2)}s for content height ${totalHeight}px`);
         }
-
     </script>
 </body>
 </html>
