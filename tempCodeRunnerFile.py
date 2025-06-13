@@ -1,1 +1,0 @@
-timestamp = timestamp.replace("T", " ")

@@ -155,7 +155,7 @@
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="{{ url_for('static', filename='demiko/songs/unlock_better.webm') }}" type="audio/webm">
+        <source src="{{ url_for('static', filename='demiko/songs/Exitlude.mp3') }}" type="audio/mp3">
     </audio>
 
     <script>
@@ -226,7 +226,7 @@
                     audio.volume = 0.25;
 
                     // Set the time and play
-                    audio.currentTime = 1;
+                    audio.currentTime = 0;
 
                     // Play with error handling
                     const playPromise = audio.play();

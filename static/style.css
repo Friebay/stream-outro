@@ -269,7 +269,6 @@ h2 {
         transform: translateY(-100%);
     }
 }
-
 /* Make sure the screen is initially hidden and fades in when visible class is added */
 #screen-credits {
     opacity: 0;
@@ -279,7 +278,6 @@ h2 {
 #screen-credits.visible {
     opacity: 1;
 }
-
 @media (max-width: 1200px) {
     .chatter-row,
     .emote-row {
@@ -292,21 +290,21 @@ h2 {
     .dot-line {
         font-size: 24px;
     }
-    
+
     .big-text {
         font-size: 32px;
     }
-    
+
     .stats-title {
         font-size: 32px;
     }
-    
+
     /* Grid adjustments */
     .chatter-row,
     .emote-row {
         grid-template-columns: 1fr;
     }
-    
+
     /* Size and overflow handling */
     .role,
     .username {
@@ -314,7 +312,7 @@ h2 {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    
+
     /* Font size adjustments */
     .username-text,
     .message-count,
@@ -322,7 +320,7 @@ h2 {
     .emote-count {
         font-size: 20px;
     }
-    
+
     /* Image size adjustment */
     .small-image {
         width: 25px;
