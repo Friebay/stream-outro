@@ -32,6 +32,7 @@ class TwitchChatBot(commands.Bot):
             initial_channels=[channel_to_record]
         )
         self.log_file: str | None = None # Added type hint
+        self.chat_jsonl_file: str = os.path.join(SAVE_DIR, 'chat.jsonl') # Path for chat.jsonl
         
         # Create directory if it doesn't exist
         if not os.path.exists(SAVE_DIR):
@@ -44,6 +45,15 @@ class TwitchChatBot(commands.Bot):
         timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
         self.log_file = os.path.join(SAVE_DIR, f'thexanos_chat_log_{timestamp}.jsonl')
         print(f'Logging chat to: {self.log_file}')
+
+        # Remove old chat.jsonl if it exists
+        if os.path.exists(self.chat_jsonl_file):
+            try:
+                os.remove(self.chat_jsonl_file)
+                print(f"Removed old log file: {self.chat_jsonl_file}")
+            except Exception as e:
+                print(f"Error removing old log file {self.chat_jsonl_file}: {e}")
+        print(f'Also logging chat to: {self.chat_jsonl_file}')
         print('Monitoring thexanos\'s chat...')
 
     async def event_message(self, message: twitchio.Message): # Added type hint for message
@@ -71,10 +81,15 @@ class TwitchChatBot(commands.Bot):
         }
         
         try:
-            # Save to file with ensure_ascii=False for proper Lithuanian character encoding
+            # Save to timestamped file with ensure_ascii=False for proper Lithuanian character encoding
             with open(self.log_file, 'a', encoding='utf-8') as f:
                 json.dump(chat_data, f, ensure_ascii=False, default=str)
                 f.write('\n')
+            
+            # Save to chat.jsonl with ensure_ascii=False
+            with open(self.chat_jsonl_file, 'a', encoding='utf-8') as f_jsonl:
+                json.dump(chat_data, f_jsonl, ensure_ascii=False, default=str)
+                f_jsonl.write('\n')
                 
             # Print to console with first-time chatter indicator
             first_time_indicator = "🆕 " if is_first_time else ""
