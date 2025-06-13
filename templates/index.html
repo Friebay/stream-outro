@@ -8,19 +8,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Added preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='demiko/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='name/style.css') }}">
 </head>
 
 <body>
     <div class="screen" id="black-screen0"></div>
     <div class="screen" id="screen2">
-        <img src="{{ url_for('static', filename='demiko/images/logo.jpg') }}" style="opacity: 0.8;">
+        <img src="{{ url_for('static', filename='name/images/logo.png') }}" style="opacity: 0.8; width: 600px;">
     </div>
     <div class="screen" id="black-screen1"></div>
 
     <section class="screen" id="screen4">
-        <p class="medium-text">Režisierius ir Rašytojas</p>
-        <h1 class="big-text">deMiko</h1>
+        <p class="medium-text">Directed and Writen by</p>
+        <h1 class="big-text">TheXanos</h1>
     </section>
 
     <div class="screen" id="black-screen2"></div>
@@ -29,15 +29,15 @@
 
     <div id="screen6" class="screen">
         <div class="stat-number">
-            <p class="medium-text">Iš Viso Pokalbiautojų</p>
+            <p class="medium-text">Total Chatters</p>
             <div class="big-text">{{ chatters_amount }}</div>
         </div>
         <div class="stat-number">
-            <p class="medium-text">Naujų Pokalbiautojų</p>
+            <p class="medium-text">New Chatters</p>
             <div class="big-text">{{ new_chatters_amount }}</div>
         </div>
         <div class="stat-number">
-            <p class="medium-text">Iš Viso Žinučių</p>
+            <p class="medium-text">Total Messages</p>
             <div class="big-text">{{ message_amount }}</div>
         </div>
     </div>
@@ -46,11 +46,11 @@
 
     <div id="screen7" class="screen">
         <div class="stat-number">
-            <p class="medium-text">Išskirtinių Emociukų</p>
+            <p class="medium-text">Unique Emotes</p>
             <div class="big-text">{{ unique_emote_amount }}</div>
         </div>
         <div class="stat-number">
-            <p class="medium-text">Iš Viso Emociukų</p>
+            <p class="medium-text">Total Emotes</p>
             <div class="big-text">{{ emote_amount }}</div>
         </div>
     </div>
@@ -59,17 +59,17 @@
 
     <div id="screen8" class="screen">
         <div class="dot-line">
-            <span class="role">Visus prisišaukiantis</span>
+            <span class="role">The Summoner</span>
             <span class="dots"></span>
             <span class="username">{{ person_who_mentioned_most_unique_people }}</span>
         </div>
         <div class="dot-line">
-            <span class="role">Populiariausias</span>
+            <span class="role">The Famous</span>
             <span class="dots"></span>
             <span class="username">{{ person_who_was_mentioned_the_most_times }}</span>
         </div>
         <div class="dot-line">
-            <span class="role">Emocionalus</span>
+            <span class="role">The Emotional</span>
             <span class="dots"></span>
             <span class="username">{{ person_who_typed_the_most_emotes }}</span>
         </div>
@@ -78,7 +78,7 @@
     <div class="screen" id="black-screen6"></div>
 
     <div class="screen" id="screen9">
-        <h2 class="stats-title">Daugiausia Išsiųstų Žinučių</h2>
+        <h2 class="stats-title">Most Sent Messages</h2>
         <div class="chatter-table">
             {% for chatter in top_chatters %}
                 {% if loop.index0 % 3 == 0 %}
@@ -101,7 +101,7 @@
     <div class="screen" id="black-screen7"></div>
 
     <div class="screen" id="screen10">
-        <h2 class="stats-title">Populiariausi Emociukai</h2>
+        <h2 class="stats-title">Most Popular Emotes</h2>
         <div class="emote-table">
             {% for emote in top_emotes %}
                 {% if loop.index0 % 3 == 0 %}
@@ -127,18 +127,10 @@
     <div class="screen" id="black-screen8"></div>
 
     <div class="screen" id="screen11">
-        <p class="medium-text">Hobby Horsing išbandymas</p>
-        <p class="big-text">kai deMiko kanalas pasieks</p>
-        <p class="medium-text">200 000 prenumeratų!</p>
+        <p class="medium-text">TheXanos will</p>
+        <p class="big-text">move out in the next</p>
+        <p class="medium-text">100 years</p>
     </div>
-
-    <!--
-    <div class="screen" id="screen11">
-        <p class="medium-text">Trūksta</p>
-        <p class="big-text">{{ subscirber_amount }}</p>
-        <p class="medium-text">prenumeratų YouTube kanale<br>iki <i>Hobby Horsing</i> išbandymo</p>
-    </div>
-    -->
 
     <div class="screen" id="black-screen9"></div>
 
@@ -155,7 +147,7 @@
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="{{ url_for('static', filename='demiko/songs/Exitlude.mp3') }}" type="audio/mp3">
+        <source src="{{ url_for('static', filename='name/songs/Exitlude.mp3') }}" type="audio/mp3">
     </audio>
 
     <script>

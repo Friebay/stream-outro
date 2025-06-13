@@ -137,15 +137,6 @@ def find_person_with_most_unique_mentions(chat_file_path):
 
 @app.route('/')
 def outro():
-    subscribers_needed_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\subscribers_needed.txt"
-
-    with open(subscribers_needed_path, "r", encoding="utf-8") as file:
-        subscirber_amount = int(file.read().strip())
-        
-    followers_needed_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\follower_goal.txt"
-
-    with open(followers_needed_path, "r", encoding="utf-8") as file:
-        follower_amount = int(file.read().strip())
 
     chat_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
     emotes_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\emotes.csv"
@@ -335,11 +326,11 @@ def outro():
 
     person_who_typed_the_most_emotes = max(user_emote_counts, key=user_emote_counts.get)
 
-    return render_template('index.html', top_chatters=top_chatters, top_emotes=top_emotes, subscirber_amount=subscirber_amount,
+    return render_template('index.html', top_chatters=top_chatters, top_emotes=top_emotes, subscirber_amount=0,
                            chatters_amount=chatters_amount, new_chatters_amount=new_chatters_amount,
                            message_amount=message_amount, unique_emote_amount=unique_emote_amount, emote_amount=emote_amount, 
                            person_who_mentioned_most_unique_people = top_mentioner, person_who_typed_the_most_emotes=person_who_typed_the_most_emotes,
-                           chatters=chatters, follower_amount=follower_amount, person_who_was_mentioned_the_most_times = most_mentioned)
+                           chatters=chatters, follower_amount=0, person_who_was_mentioned_the_most_times = most_mentioned)
 
 
 if __name__ == '__main__':
