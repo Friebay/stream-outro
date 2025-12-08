@@ -12,18 +12,15 @@ app = Flask(__name__)
 
 def find_most_mentioned_person(chat_file_path):
     # Regular expression pattern to detect mentions
-    # Updated to include underscores and numbers which are common in usernames
     mention_pattern = re.compile(r"(?<!\w)@([a-zA-Z0-9_]{1,})")
 
     # Dictionary to store the mention count for each mentioned user
     mentioned_users_count = defaultdict(int)
 
     try:
-        # Process each message in the chat.jsonl file
         with open(chat_file_path, "r", encoding="utf-8") as chat_file:
             for line_number, line in enumerate(chat_file, 1):
                 try:
-                    # Parse JSON line
                     data = json.loads(line)
                     message = data.get("message", "")
 
@@ -76,11 +73,9 @@ def find_person_with_most_unique_mentions(chat_file_path):
     user_unique_mentions = defaultdict(set)
 
     try:
-        # Process each message in the chat.jsonl file
         with open(chat_file_path, "r", encoding="utf-8") as chat_file:
             for line_number, line in enumerate(chat_file, 1):
                 try:
-                    # Parse JSON line
                     data = json.loads(line)
                     username = data.get("username", "").lower()
                     message = data.get("message", "")
@@ -119,9 +114,7 @@ def find_person_with_most_unique_mentions(chat_file_path):
         # Get the user who mentioned the most unique people
         top_user = sorted_users[0][0]
         unique_count = sorted_users[0][1]
-        mentioned_users = sorted(
-            user_unique_mentions[top_user]
-        )  # Sort for consistent output
+        mentioned_users = sorted(user_unique_mentions[top_user])
 
         # Print statistics
         print("\nUnique Mention Statistics:")
@@ -181,12 +174,6 @@ def outro():
                 if username not in first_message_timestamps:
                     first_message_timestamps[username] = timestamp
 
-    # Format the top chatters as required
-    top_chatters = [
-        {"username": user, "message_amount": count}
-        for user, count in username_counter.most_common(18)
-    ]
-
     # Format the first message timestamps for each unique user
     chatters = [
         {"timestamp": first_message_timestamps[user], "username": user}
@@ -223,8 +210,6 @@ def outro():
                 new_chatters_count += 1
 
     chatters_amount = len(unique_chatters)
-    new_chatters_amount = new_chatters_count
-    message_amount = message_count
 
     emote_names = set()
 
@@ -247,7 +232,7 @@ def outro():
     emote_count = 0
     unique_emotes_used = set()
 
-    # Process each message in the chat.jsonl file
+    # Process each message in the chat file
     with open(chat_file_path, "r", encoding="utf-8") as chat_file:
         for line in chat_file:
             data = json.loads(line)
@@ -292,7 +277,7 @@ def outro():
     # Counter for emote occurrences
     emote_counter = Counter()
 
-    # Process each message in the chat.jsonl file
+    # Process each message in the chat file
     with open(chat_file_path, "r", encoding="utf-8") as chat_file:
         for line in chat_file:
             data = json.loads(line)
@@ -367,8 +352,8 @@ def outro():
         top_emotes=top_emotes,
         subscirber_amount=0,
         chatters_amount=chatters_amount,
-        new_chatters_amount=new_chatters_amount,
-        message_amount=message_amount,
+        new_chatters_amount=new_chatters_count,
+        message_amount=message_count,
         unique_emote_amount=unique_emote_amount,
         emote_amount=emote_amount,
         person_who_mentioned_most_unique_people=top_mentioner,

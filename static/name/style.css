@@ -3,7 +3,7 @@ html {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    font-family: 'Galindo', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: black;
 }
 
@@ -14,8 +14,7 @@ html,
 .role,
 .username,
 .big-text,
-.medium-text
-h2 {
+.medium-text h2 {
     color: gold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
@@ -158,7 +157,8 @@ h2 {
     align-items: center;
     background: rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
-    min-width: 0; /* Enables text truncation */
+    min-width: 0;
+    /* Enables text truncation */
 }
 
 .username-text {
@@ -168,7 +168,8 @@ h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     margin-right: 10px;
-    max-width: 70%; /* Ensures space for the message count */
+    max-width: 70%;
+    /* Ensures space for the message count */
 }
 
 .message-count {
@@ -265,10 +266,12 @@ h2 {
     0% {
         transform: translateY(100%);
     }
+
     100% {
         transform: translateY(-100%);
     }
 }
+
 /* Make sure the screen is initially hidden and fades in when visible class is added */
 #screen-credits {
     opacity: 0;
@@ -277,53 +280,4 @@ h2 {
 
 #screen-credits.visible {
     opacity: 1;
-}
-@media (max-width: 1200px) {
-    .chatter-row,
-    .emote-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    /* Text adjustments */
-    .dot-line {
-        font-size: 24px;
-    }
-
-    .big-text {
-        font-size: 32px;
-    }
-
-    .stats-title {
-        font-size: 32px;
-    }
-
-    /* Grid adjustments */
-    .chatter-row,
-    .emote-row {
-        grid-template-columns: 1fr;
-    }
-
-    /* Size and overflow handling */
-    .role,
-    .username {
-        max-width: 45%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* Font size adjustments */
-    .username-text,
-    .message-count,
-    .emote-name,
-    .emote-count {
-        font-size: 20px;
-    }
-
-    /* Image size adjustment */
-    .small-image {
-        width: 25px;
-        height: 25px;
-    }
 }

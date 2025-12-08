@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stream Outro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Added preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='name/style.css') }}">
@@ -81,8 +81,8 @@
         <h2 class="stats-title">Most Sent Messages</h2>
         <div class="chatter-table">
             {% for chatter in top_chatters %}
-                {% if loop.index0 % 3 == 0 %}
-                    <div class="chatter-row">
+            {% if loop.index0 % 3 == 0 %}
+            <div class="chatter-row">
                 {% endif %}
 
                 <div class="chatter-cell">
@@ -91,8 +91,8 @@
                 </div>
 
                 {% if loop.index0 % 3 == 2 or loop.last %}
-                    </div>
-                {% endif %}
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -104,8 +104,8 @@
         <h2 class="stats-title">Most Popular Emotes</h2>
         <div class="emote-table">
             {% for emote in top_emotes %}
-                {% if loop.index0 % 3 == 0 %}
-                    <div class="emote-row">
+            {% if loop.index0 % 3 == 0 %}
+            <div class="emote-row">
                 {% endif %}
 
                 <div class="emote-cell">
@@ -117,8 +117,8 @@
                 </div>
 
                 {% if loop.index0 % 3 == 2 or loop.last %}
-                    </div>
-                {% endif %}
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -137,11 +137,11 @@
     <div id="screen-credits" class="screen">
         <div class="credits">
             {% for chatter in chatters %}
-                <p>
-                    <span class="timestamp">{{ chatter.timestamp }}</span>
-                    <br>
-                    {{ chatter.username }}
-                </p>
+            <p>
+                <span class="timestamp">{{ chatter.timestamp }}</span>
+                <br>
+                {{ chatter.username }}
+            </p>
             {% endfor %}
         </div>
     </div>
@@ -202,7 +202,7 @@
         }
 
         // Improved audio handling
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const audio = document.getElementById("backgroundMusic");
 
             // Create a promise to handle audio loading
@@ -214,10 +214,10 @@
             // Handle audio playback
             audioReady
                 .then(() => {
-                    // Remove controls after loading (if you don't want them visible)
+                    // Remove controls after loading
                     audio.removeAttribute("controls");
 
-                    // Set volume to ensure it's not muted
+                    // Set volume
                     audio.volume = 0.25;
 
                     // Set the time and play
@@ -242,7 +242,7 @@
         });
 
         // Start the sequence on page load
-        window.onload = function() {
+        window.onload = function () {
             showNextScreen();
         };
 
@@ -265,4 +265,5 @@
         }
     </script>
 </body>
+
 </html>
