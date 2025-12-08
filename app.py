@@ -135,12 +135,24 @@ def find_person_with_most_unique_mentions(chat_file_path):
         print(f"Error: An unexpected error occurred: {e}")
         return None, 0, None
 
+def get_newest_chat_file(chat_file_folder: str):
+    chat_files = os.listdir(chat_file_folder)
+    chat_files = [file for file in chat_files if file.endswith(".jsonl")]
+    
+    if not chat_files:
+        return None
+    
+    newest_chat_file = max(chat_files, key=lambda x: os.path.getmtime(os.path.join(chat_file_folder, x)))
+    return os.path.join(chat_file_folder, newest_chat_file)
+
+
 @app.route('/')
 def outro():
 
-    chat_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\chat.jsonl"
-    emotes_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\emotes.csv"
-    emotes_default_file_path = r"C:\Users\zabit\Documents\GitHub\stream-outro\data\emotes_default.csv"
+    chat_file_folder = "data"
+    chat_file_path = get_newest_chat_file(chat_file_folder)
+    emotes_file_path = "data/emotes.csv"
+    emotes_default_file_path = "data/emotes_default.csv"
 
     username_counter = Counter()
 

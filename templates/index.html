@@ -151,9 +151,12 @@
     </audio>
 
     <script>
-        // Start audio playback from 35 seconds
+        // Set the start time for the audio playback
+        const startTime = 0;
+
+        // Start audio playback from currentTime seconds
         const audio = document.getElementById("backgroundMusic");
-        audio.currentTime = 1;
+        audio.currentTime = 0;
         audio.play();
 
         // Define the sequence of screens with their durations in milliseconds
@@ -218,7 +221,7 @@
                     audio.volume = 0.25;
 
                     // Set the time and play
-                    audio.currentTime = 0;
+                    audio.currentTime = startTime;
 
                     // Play with error handling
                     const playPromise = audio.play();
