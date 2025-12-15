@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stream Outro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Added preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/name/style.css">
@@ -14,7 +14,7 @@
 <body>
     <div class="screen" id="black-screen0"></div>
     <div class="screen" id="screen2">
-        <img src="static/name/images/logo.png" style="opacity: 0.8; width: 600px;">
+        <img src="{{ url_for('static', filename='name/images/logo.png') }}" style="opacity: 0.8;">
     </div>
     <div class="screen" id="black-screen1"></div>
 
@@ -103,15 +103,15 @@
     <div class="screen" id="screen10">
         <h2 class="stats-title">Populiariausi Emociukai</h2>
         <div class="emote-table">
-            
-            
-            <div class="emote-row">
-                
+            {% for emote in top_emotes %}
+                {% if loop.index0 % 3 == 0 %}
+                    <div class="emote-row">
+                {% endif %}
 
                 <div class="emote-cell">
                     <div class="emote-info">
-                        <img src="https://static-cdn.jtvnw.net/emoticons/v2/425618/default/dark/3.0" alt="LUL" class="emote-image">
-                        <span class="emote-name">&emsp;(LUL)</span>
+                        <img src="{{ emote.webp }}" alt="{{ emote.name }}" class="emote-image">
+                        <span class="emote-name">&emsp;({{ emote.name }})</span>
                     </div>
                     <span class="emote-count">{{ emote.amount }}</span>
                 </div>
@@ -155,7 +155,7 @@
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="{{ url_for('static', filename='demiko/songs/snakes.webm') }}" type="audio/webm">
+        <source src="static/name/songs/Exitlude.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -247,7 +247,7 @@
         });
 
         // Start the sequence on page load
-        window.onload = function () {
+        window.onload = function() {
             showNextScreen();
         };
 
