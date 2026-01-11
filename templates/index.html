@@ -81,8 +81,8 @@
         <h2 class="stats-title">Daugiausia Išsiųstų Žinučių</h2>
         <div class="chatter-table">
             {% for chatter in top_chatters %}
-                {% if loop.index0 % 3 == 0 %}
-                    <div class="chatter-row">
+            {% if loop.index0 % 3 == 0 %}
+            <div class="chatter-row">
                 {% endif %}
 
                 <div class="chatter-cell">
@@ -91,8 +91,8 @@
                 </div>
 
                 {% if loop.index0 % 3 == 2 or loop.last %}
-                    </div>
-                {% endif %}
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -104,8 +104,8 @@
         <h2 class="stats-title">Populiariausi Emociukai</h2>
         <div class="emote-table">
             {% for emote in top_emotes %}
-                {% if loop.index0 % 3 == 0 %}
-                    <div class="emote-row">
+            {% if loop.index0 % 3 == 0 %}
+            <div class="emote-row">
                 {% endif %}
 
                 <div class="emote-cell">
@@ -117,8 +117,8 @@
                 </div>
 
                 {% if loop.index0 % 3 == 2 or loop.last %}
-                    </div>
-                {% endif %}
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -145,17 +145,17 @@
     <div id="screen-credits" class="screen">
         <div class="credits">
             {% for chatter in chatters %}
-                <p>
-                    <span class="timestamp">{{ chatter.timestamp }}</span>
-                    <br>
-                    {{ chatter.username }}
-                </p>
+            <p>
+                <span class="timestamp">{{ chatter.timestamp }}</span>
+                <br>
+                {{ chatter.username }}
+            </p>
             {% endfor %}
         </div>
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="static/name/songs/zole.mp3" type="audio/mp3">
+        <source src="static/name/songs/ezeras.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -207,7 +207,7 @@
         }
 
         // Improved audio handling
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const audio = document.getElementById("backgroundMusic");
 
             // Create a promise to handle audio loading
@@ -247,7 +247,7 @@
         });
 
         // Start the sequence on page load
-        window.onload = function() {
+        window.onload = function () {
             showNextScreen();
         };
 
@@ -270,4 +270,5 @@
         }
     </script>
 </body>
+
 </html>
