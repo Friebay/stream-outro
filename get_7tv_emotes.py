@@ -13,7 +13,7 @@ def get_emote_set_emotes(emote_set_id):
             emotes = data['emotes']
             emote_names = [emote['name'] for emote in emotes]  # List of emote names
             emote_ids = [emote['id'] for emote in emotes]
-            emote_image_url = [f"https://cdn.7tv.app/emote/{emote['id']}/4x.webp" for emote in emotes]
+            emote_image_url = [f"https://cdn.7tv.app/emote/{emote['id']}/1x.webp" for emote in emotes]
             return emote_names, emote_ids, emote_image_url
         else:
             print("No emotes found in this emote set.")
