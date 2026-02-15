@@ -127,9 +127,9 @@
     <div class="screen" id="black-screen8"></div>
 
     <div class="screen" id="screen11">
-        <p class="medium-text">Kauno Kristaus Prisikėlimo bazilikoje<br>Penktadienį, 17 val.</p>
-        <p class="big-text">Bendruomenės apkasų žvakių gamyba VietosValdžiai prisiminti</p>
-        <p class="medium-text">Daugiau informacijos pagrindiniame Discord kanale</p>
+        <p class="medium-text">Prisijunkite prie</p>
+        <p class="big-text">„Discord“ bendruomenės!</p>
+        <p class="medium-text">Nuoroda „Twitch“ aprašyme</p>
     </div>
 
     <!--
@@ -155,7 +155,7 @@
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="static/name/songs/noriu.mp3" type="audio/mp3">
+        <source src="static/name/songs/sninga.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -181,7 +181,7 @@
             { id: 'black-screen7', duration: 1000 },
             { id: 'screen10', duration: 8000 },
             { id: 'black-screen8', duration: 1000 },
-            { id: 'screen11', duration: 18000 },
+            { id: 'screen11', duration: 10000 },
             { id: 'black-screen9', duration: 1000 },
             { id: 'screen-credits', duration: 600000 }
         ];
@@ -226,7 +226,7 @@
                     audio.volume = 0.30;
 
                     // Set the time and play
-                    audio.currentTime = 9;
+                    audio.currentTime = 1;
 
                     // Play with error handling
                     const playPromise = audio.play();
@@ -258,7 +258,7 @@
             const screenHeight = window.innerHeight; // Height of the visible screen
 
             // Calculate duration: proportional to content height
-            const baseDuration = 5; // Base duration per screen height in seconds
+            const baseDuration = 1; // Base duration per screen height in seconds
             const duration = (totalHeight / screenHeight) * baseDuration;
 
             // Set dynamic animation duration
