@@ -155,13 +155,13 @@
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="static/name/songs/sninga.mp3" type="audio/mp3">
+        <source src="static/name/songs/mess.wav" type="audio/wav">
     </audio>
 
     <script>
         // Start audio playback from 35 seconds
         const audio = document.getElementById("backgroundMusic");
-        audio.currentTime = 17;
+        audio.currentTime = 0;
         audio.play();
 
         // Define the sequence of screens with their durations in milliseconds
@@ -226,7 +226,7 @@
                     audio.volume = 0.30;
 
                     // Set the time and play
-                    audio.currentTime = 1;
+                    audio.currentTime = 0;
 
                     // Play with error handling
                     const playPromise = audio.play();
@@ -258,7 +258,7 @@
             const screenHeight = window.innerHeight; // Height of the visible screen
 
             // Calculate duration: proportional to content height
-            const baseDuration = 1; // Base duration per screen height in seconds
+            const baseDuration = 5; // Base duration per screen height in seconds
             const duration = (totalHeight / screenHeight) * baseDuration;
 
             // Set dynamic animation duration
