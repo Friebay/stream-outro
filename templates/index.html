@@ -155,13 +155,13 @@
     </div>
 
     <audio id="backgroundMusic" preload="auto">
-        <source src="static/name/songs/mess.wav" type="audio/wav">
+        <source src="static/name/songs/powerforever.mp3" type="audio/mp3">
     </audio>
 
     <script>
         // Start audio playback from 35 seconds
         const audio = document.getElementById("backgroundMusic");
-        audio.currentTime = 0;
+        audio.currentTime = 42;
         audio.play();
 
         // Define the sequence of screens with their durations in milliseconds
@@ -226,7 +226,7 @@
                     audio.volume = 0.30;
 
                     // Set the time and play
-                    audio.currentTime = 0;
+                    audio.currentTime = 42;
 
                     // Play with error handling
                     const playPromise = audio.play();
